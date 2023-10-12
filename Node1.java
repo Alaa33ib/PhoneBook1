@@ -1,14 +1,14 @@
 public class Node1 //Nodes that contain Contact as data
 {
 
-	private Contact data;
-	private Node1 next;
+     private Contact data;
+     private Node1 next;
 
-	public Node1(Contact s)
+   public Node1(Contact s)
    {
-	  data = s;
-	  next = null;
-	}
+      data = s;
+      next = null;
+   }
    
    public void setData(Contact data)
    {
@@ -20,14 +20,14 @@ public class Node1 //Nodes that contain Contact as data
      return data;
    }
 
-	public void setNext(Node1 next)
+   public void setNext(Node1 next)
    {
-	  this.next = next;
-	}
+     this.next = next;
+   }
    
-	public Node1 getNext()
+   public Node1 getNext()
    {
-	  return next;
-	}
+     return next;
+   }
 
 }

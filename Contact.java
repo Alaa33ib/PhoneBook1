@@ -13,17 +13,17 @@ public class Contact implements Comparable
   {
     this.name = name;
     this.phone = phone;
-	 this.email = email;
-	 this.address = address;
-	 this.birthday = birthday;
-	 this.notes = notes;
+    this.email = email;
+    this.address = address;
+    this.birthday = birthday;
+    this.notes = notes;
     eventList = new LinkedListEvent();
   }
 
 
   public String toString()
   {
-	 return "Name: "+name+"\nPhone: "+phone+"\nEmail: "+email+"\nAddress: "+address+"\nBirthday: "+birthday+"\nNotes: "+notes+ "\nEvents: " + eventList.display();
+     return "Name: "+name+"\nPhone: "+phone+"\nEmail: "+email+"\nAddress: "+address+"\nBirthday: "+birthday+"\nNotes: "+notes+ "\nEvents: " + eventList.display();
   }
 
   public int compareTo(Object s) 

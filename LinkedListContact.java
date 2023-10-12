@@ -227,6 +227,3 @@ public class LinkedListContact //LinkedList of Contacts
   } 
 
 }
-
-
-

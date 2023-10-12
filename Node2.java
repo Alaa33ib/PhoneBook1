@@ -1,14 +1,14 @@
 public class Node2 //Nodes that contain Event as data
 {
 
-	private Event data;
-	private Node2 next;
+    private Event data;
+    private Node2 next;
 
-	public Node2(Event s)
-   {
-		data = s;
-		next = null;
-	}
+    public Node2(Event s)
+    {
+	data = s;
+	next = null;
+    }
    
    public void setData(Event data)
    {
@@ -20,13 +20,13 @@ public class Node2 //Nodes that contain Event as data
      return data;
    }
 
-	public void setNext(Node2 next)
+   public void setNext(Node2 next)
    {
-		this.next = next;
-	}
+	this.next = next;
+   }
    
-	public Node2 getNext()
+   public Node2 getNext()
    {
-		return next;
-	}
+	return next;
+   }
 }

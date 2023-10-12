@@ -158,12 +158,12 @@ public class Phonebook
          System.out.print("Enter the event's title: ");
          String title = key.next();
          System.out.print("Enter the contact name: ");
-         String contactName = key.next();           
+         contactName = key.next();           
          System.out.print("Enter the event's date and time(MM/DD/YYYY HH:MM): ");
          String dateAndTime = key.next();
          System.out.print("Enter the event's location: ");
          String location = key.next();
-         if(Phonebook.search(contactName, "Name") && Events.isNotATimeConflict(dateAndTime) && Phonebook.retrieve().getEventList().isNotATimeConflict(dateAndTime)) //search sets found element as current
+         if(Phonebook.search(contactName, "Name") && Events.isNotATimeConflict(dateAndTime)) //search sets found element as current
          {
           System.out.println("Event will be scheduled with the contact above");
           Events.insertEvent(new Event(title, Phonebook.retrieve(), dateAndTime, location)); 
@@ -251,7 +251,7 @@ public class Phonebook
  }
  
  //contacts by shared event method
- /**public static void contactsByEvent(LinkedList<String> list, String eventName)
+ public static void contactsByEvent(LinkedListEvent list, String eventName)
  {
     if(!list.search(eventName,"Event title"))
       System.out.println("Event not found");
@@ -265,7 +265,7 @@ public class Phonebook
          list.getContactList().fintNext();
       }
       System.out.println(list.getContactList().retrieve().toString());
-    } */ 
+    } 
  }
  
  

@@ -257,7 +257,7 @@ public class Phonebook
       System.out.println("Event not found");
     else
     {
-      System.out.println("All contacts belonging to the event above: ")
+      System.out.println("All contacts belonging to the event above: ");
       list.getContactList().findfirst();
       while(!list.getContactList().last())
       {

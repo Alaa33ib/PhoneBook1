@@ -2,7 +2,6 @@ public class Contact implements Comparable
 {
 
   private String name, phone, email, address, birthday, notes;
-  //private LinkedListEvent eventList;
 
   public Contact() //default constructor
   {
@@ -17,13 +16,11 @@ public class Contact implements Comparable
 	 this.address = address;
 	 this.birthday = birthday;
 	 this.notes = notes;
-    //eventList = new LinkedListEvent();
   }
-
 
   public String toString()
   {
-	 return "Name: "+name+"\nPhone: "+phone+"\nEmail: "+email+"\nAddress: "+address+"\nBirthday: "+birthday+"\nNotes: "+notes;//+ "\nEvents: " + eventList.display();
+	 return "Name: "+name+",  Phone: "+phone+",  Email: "+email+",  Address: "+address+",  Birthday: "+birthday+",  Notes: "+notes;
   }
 
   public int compareTo(Object s) 
@@ -79,10 +76,7 @@ public class Contact implements Comparable
 	return notes;
   }
   
-  /**public LinkedListEvent getEventList()
-  {
-	return eventList;
-  } */
-  
 }
+
+  
 

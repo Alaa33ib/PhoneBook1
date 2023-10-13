@@ -75,6 +75,7 @@ public class LinkedListContact //LinkedList of Contacts
     public boolean deleteContact(String attribute, String criteria) //deletes a contact from the list
     {
       Node1 tmp = head;
+      Node1 prev = null;
       switch(criteria)
       {
        case "Name":
@@ -83,31 +84,49 @@ public class LinkedListContact //LinkedList of Contacts
        {
          if(tmp.getData().getName().equalsIgnoreCase(attribute))
          {
-           current = tmp;
-           this.remove();
+           if(tmp == head) 
+           {
+             head = head.getNext();
+             current = head;
+           }
+    	     else 
+           {
+    		    prev.setNext(tmp.getNext());	
+             current = head;
+           }
            return true;
          }
+         prev = tmp;
          tmp = tmp.getNext();
        }
-       break;
+       return false;
        
        case "Phone Number":
        
        while(tmp != null)
        {
          if(tmp.getData().getPhone().equalsIgnoreCase(attribute))
-         { 
-          current = tmp;
-          this.remove();
-          return true;
+         {
+           if(tmp == head) 
+           {
+             head = head.getNext();
+             current = head;
+           }
+    	     else 
+           {
+    		    prev.setNext(tmp.getNext());	
+             current = head;
+           }
+           return true;
          }
+         prev = tmp;
          tmp = tmp.getNext();
-       }
-       break; 
-      }   
-      return false;
-    }        
-
+      }
+      return false; 
+     }
+     return false;
+    }
+    
     public boolean search(String attribute, String criteria)
     {
       boolean flag = false; 
@@ -225,3 +244,6 @@ public class LinkedListContact //LinkedList of Contacts
   } 
 
 }
+
+
+

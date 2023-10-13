@@ -69,7 +69,7 @@ public class LinkedListEvent //LinkedList of Events
     	else 
         current = head;
    }
-    
+  //end of ADT methods  
   public boolean isNotATimeConflict(String dateAndTime)
   {
     Node2 temp = head; 
@@ -143,7 +143,6 @@ public class LinkedListEvent //LinkedList of Events
       boolean flag = false; 
       Node2 temp = current;
      	current = head;
-      Node2 nameS = head;
       
       switch(criteria) 
       {
@@ -163,25 +162,25 @@ public class LinkedListEvent //LinkedList of Events
      	 return false;
        
       case "Contact Name":
-      
-      while(nameS != null)
+      Node2 tmp = head;
+      while(tmp != null)
       {
-        nameS.getData().getContactList().findFirst();
-        while(!nameS.getData().getContactList().last())
+        tmp.getData().getContactList().findFirst();
+        while(!tmp.getData().getContactList().last())
         {
-     	    if(nameS.getData().getContactList().retrieve().getName().equalsIgnoreCase(attribute)) 
+     	    if(tmp.getData().getContactList().retrieve().getName().equalsIgnoreCase(attribute)) 
           { 
-           System.out.println(nameS.getData().toString());
+           System.out.println(tmp.getData().toString());
            flag = true;
           }
-     	    nameS.getData().getContactList().findNext();
+     	    tmp.getData().getContactList().findNext();
      	  }
-        if(nameS.getData().getContactList().retrieve().getName().equalsIgnoreCase(attribute)) //checks last element
+        if(tmp.getData().getContactList().retrieve().getName().equalsIgnoreCase(attribute)) //checks last element
         { 
-          System.out.println(nameS.getData().toString());
+          System.out.println(tmp.getData().toString());
           flag = true;
         }
-       nameS = nameS.getNext();
+       tmp = tmp.getNext();
       }
       return flag;  
         

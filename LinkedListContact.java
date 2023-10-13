@@ -242,8 +242,32 @@ public class LinkedListContact //LinkedList of Contacts
       insert(data);
    }
   } 
+  
+  public void display()
+  {
+     Node1 tmp = head;
+     while(tmp != null)
+     {
+       System.out.println(tmp.getData().toString());
+       tmp = tmp.getNext();
+     }
+  }
+  
+  public String toString()
+  {
+     Node1 tmp = head;
+     String list = "";
+     while(tmp != null)
+     {  list += tmp.getData().toString() + "\n ";
+        tmp = tmp.getNext();
+     }
+     return list; 
+  }
 
 }
+
+
+
 
 
 

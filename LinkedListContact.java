@@ -16,7 +16,7 @@ public class LinkedListContact //LinkedList of Contacts
 
 	public boolean last()
    {
-	  return current.getNext()==null;
+	  return (current.getNext() == null);
 	}
 
 	public void findFirst()
@@ -72,39 +72,39 @@ public class LinkedListContact //LinkedList of Contacts
         current = head;
     }
 
-    public boolean delete(String attribute, String criteria) //deletes a contact from the list
+    public boolean deleteContact(String attribute, String criteria) //deletes a contact from the list
     {
-      //Node1 tmp = current;
-      current = head;
+      Node1 tmp = head;
       switch(criteria)
       {
        case "Name":
        
-       while(current != null)
+       while(tmp != null)
        {
-         if(this.retrieve().getName().equalsIgnoreCase(attribute))
+         if(tmp.getData().getName().equalsIgnoreCase(attribute))
          {
+           current = tmp;
            this.remove();
            return true;
          }
-         current = current.getNext();
+         tmp = tmp.getNext();
        }
        break;
        
        case "Phone Number":
        
-       while(current != null)
+       while(tmp != null)
        {
-         if(this.retrieve().getPhone().equalsIgnoreCase(attribute))
+         if(tmp.getData().getPhone().equalsIgnoreCase(attribute))
          { 
+          current = tmp;
           this.remove();
           return true;
          }
-         current = current.getNext();
+         tmp = tmp.getNext();
        }
        break; 
       }   
-      //current = tmp;  
       return false;
     }        
 
@@ -112,7 +112,7 @@ public class LinkedListContact //LinkedList of Contacts
     {
       boolean flag = false; 
       Node1 temp = current;
-     	this.findFirst();
+     	current = head;
       
       switch(criteria) 
       {
@@ -178,7 +178,7 @@ public class LinkedListContact //LinkedList of Contacts
 
      while(current != null)
      {
-     	if(this.retrieve().getEmail().equals(attribute))
+     	if(this.retrieve().getBirthday().equals(attribute))
       { 
         System.out.println(this.retrieve().toString());
      	  flag = true;
@@ -198,32 +198,30 @@ public class LinkedListContact //LinkedList of Contacts
   
   public void insertContact(Contact data)
   {
-   Node1 con = new Node1(data);
-   if(isEmpty()) 
-   { 
-     current = head = con;
-     return;
-   }  
+    Node1 con = new Node1(data);
+    if(isEmpty()) 
+    { 
+      current = head = con;
+      return;
+    }  
       
     if(data.compareTo(head.getData()) < 0)
     {
-      Node1 temp = head;
-    	head = con;
-    	con.setNext(temp);
+    	con.setNext(head);
+      head = con;
     }
     else
     {
       Node1 p = head, q = head.getNext();
-      findFirst();
-      while(!last())
+      while(p.getNext() != null)
      	{ if((data.compareTo(p.getData()) >= 0) && (data.compareTo(q.getData()) < 0))
           break;
         p = p.getNext();
         q = q.getNext(); 
-        findNext();
       }
+      current = p;
       insert(data);
-    }
+   }
   } 
 
 }

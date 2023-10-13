@@ -39,7 +39,7 @@ public class Event implements Comparable
    
     public String toString() 
     {
-        return  "Title: " + title + ",  Date and Time: " + dateAndTime +  ",  Location: " + location + ",  Contact List: " + contactList.toString();
+        return  "Title: " + title + "-Date and Time: " + dateAndTime +  "-Location: " + location + "-Contact List:\n" + contactList.toString();
     }
 
     public int compareTo(Object s) 
@@ -65,3 +65,5 @@ public class Event implements Comparable
     return 0;  
     }           
 } 
+
+ 

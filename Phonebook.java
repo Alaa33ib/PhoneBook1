@@ -7,7 +7,8 @@ public class Phonebook
    
    
    LinkedListContact Phonebook = new LinkedListContact();
-   //LinkedListEvent Events = new LinkedListEvent();
+   LinkedListEvent Events = new LinkedListEvent();
+   
    key.useDelimiter("\n");
    System.out.println("Welcome to the Linked Tree Phonebook!");
    boolean menuFlag = true;
@@ -23,37 +24,38 @@ public class Phonebook
       System.out.println("6.Print contacts by first name");
       System.out.println("7.Print all events alphabetically");
       System.out.println("8.Print all contacts attending an event");
-      System.out.println("9.Exit");
+      System.out.println("9.Add a contact to a scheduled event");
+      System.out.println("10.Exit");
       System.out.println();
       System.out.print("Enter your choice: ");
-      int choice = key.nextInt();
+      int criteria = key.nextInt();
       
       
-      switch (choice)
+      switch (criteria)
       {
         case 1:
         
-        System.out.println("Enter the contact's name: ");
+        System.out.print("Enter the contact's name: ");
         String name = key.next();
         if(Phonebook.search(name, "Name"))
         {
           System.out.println("Contact already exists in phonebook, look above, addition is rejected.");
           continue;
         } 
-        System.out.println("Enter the contact's phone number: ");
+        System.out.print("Enter the contact's phone number: ");
         String phoneNum = key.next();
         if(Phonebook.search(phoneNum, "Phone Number"))
         {
            System.out.println("Contact already exists in phonebook, look above, addition is rejected.");
            continue;
         }
-        System.out.println("Enter the contact's email address: ");
+        System.out.print("Enter the contact's email address: ");
         String email = key.next();
-        System.out.println("Enter the contact's address: ");
+        System.out.print("Enter the contact's address: ");
         String address = key.next();
-        System.out.println("Enter the contact's birthday:");
+        System.out.print("Enter the contact's birthday: ");
         String birthday = key.next();
-        System.out.println("Enter any notes for the contact: ");
+        System.out.print("Enter any notes for the contact: ");
         String notes = key.next();
         Phonebook.insertContact(new Contact(name, phoneNum, email, address, birthday, notes));
         System.out.println("Contact added successfully!");
@@ -69,13 +71,13 @@ public class Phonebook
         System.out.println("4.Address");
         System.out.println("5.Birthday");
         System.out.print("Enter your choice: ");
-        int criteria = key.nextInt();
+        criteria = key.nextInt();
         
           switch (criteria)
           {
             case 1:
             
-            System.out.println("Enter the contact's name: ");
+            System.out.print("Enter the contact's name: ");
             name = key.next();
             if(!Phonebook.search(name, "Name")) //case it is found will be printed by the method itself! 
                System.out.println("Contact not found"); 
@@ -83,7 +85,7 @@ public class Phonebook
                
             case 2:
             
-            System.out.println("Enter the contact's phone number: ");
+            System.out.print("Enter the contact's phone number: ");
             phoneNum = key.next();
             if(!Phonebook.search(phoneNum, "Phone Number")) //case it is found will be printed by the method itself!
                System.out.println("Contact not found"); 
@@ -91,7 +93,7 @@ public class Phonebook
             
             case 3:
             
-            System.out.println("Enter the contact's email address: ");
+            System.out.print("Enter the contact's email address: ");
             email = key.next();
             if(!Phonebook.search(email, "Email Address")) //case it is found will be printed by the method itself!
                System.out.println("Contact not found"); 
@@ -99,7 +101,7 @@ public class Phonebook
             
             case 4:
             
-            System.out.println("Enter the contact's address: ");
+            System.out.print("Enter the contact's address: ");
             address = key.next();
             if(!Phonebook.search(address, "Address")) //case it is found will be printed by the method itself! 
                System.out.println("Contact not found"); 
@@ -107,7 +109,7 @@ public class Phonebook
 
             case 5:
             
-            System.out.println("Enter the contact's birthday: ");
+            System.out.print("Enter the contact's birthday: ");
             birthday = key.next();
             if(!Phonebook.search(birthday, "Birthday")) //case it is found will be printed by the method itself!
                System.out.println("Contact not found"); 
@@ -133,7 +135,7 @@ public class Phonebook
           name = key.next();
           if(Phonebook.deleteContact(name, "Name")) //method will look for the contact that will be deleted and return true if the operation is successful
           { 
-           //Events.deleteAll(name, "Name"); //method in event's data structure that deletes events based on contact's name or phone number
+           Events.deleteAll(name, "Name"); //method in event's data structure that deletes events based on contact's name or phone number
            System.out.println("Contact successfully deleted");
           }
           else
@@ -145,7 +147,7 @@ public class Phonebook
           phoneNum = key.next();
           if(Phonebook.deleteContact(phoneNum, "Phone Number"))
           { 
-           //Events.deleteAll(phoneNum, "Phone Number");
+           Events.deleteAll(phoneNum, "Phone Number");
            System.out.println("Contact successfully deleted");
           }
           else
@@ -155,12 +157,12 @@ public class Phonebook
            System.out.println("You entered a number outside the allowed range, try again!");
          break;
          
-        /** case 4:
+         case 4:
      
          System.out.print("Enter the event's title: ");
          String title = key.next();
          System.out.print("Enter the contact name: ");
-         contactName = key.next();           
+         String contactName = key.next();           
          System.out.print("Enter the event's date and time(MM/DD/YYYY HH:MM): ");
          String dateAndTime = key.next();
          System.out.print("Enter the event's location: ");
@@ -169,7 +171,6 @@ public class Phonebook
          {
           System.out.println("Event will be scheduled with the contact above");
           Events.insertEvent(new Event(title, Phonebook.retrieve(), dateAndTime, location)); 
-          Phonebook.retrieve().getEventList().insertEvent(new Event(title, dateAndTime, location)); //event has a constructor that doesn't require a contact because it's redundant to have a contact that has an event with itself
           System.out.println("Event scheduled successfully!");
          }
          else
@@ -182,27 +183,27 @@ public class Phonebook
         System.out.println("1.Contact name");
         System.out.println("2.Event title");
         System.out.print("Enter your choice: ");
-        int criteria = key.nextInt();
+        criteria = key.nextInt();
         if (criteria == 1)
         {
-         System.out.println("Enter the contact's name: ");
-         String name = key.next();
-         if(!Phonebook.search(name, "Name"))
+         System.out.print("Enter the contact's name: ");
+         contactName = key.next();
+         if(!Phonebook.search(contactName, "Name"))
            System.out.println("Contact with this name is not found");
          else
          {
           System.out.println("The contact exists and these are the events scheduled with it: "); 
-          Phonebook.retrieve().getEventList().display(); //display method is in LinkedListEvent class 
+          Events.searchE(contactName, "Contact Name");
          }
         }    
         else if (criteria == 2)
         {
-         System.out.println("Enter the event's title: ");
-         String title = key.next();
-         if(!Events.search(title, "Title")) //case it is found will be printed by the method itself exactly like phonebook search
-           System.out.println("Event not found"); 
+         System.out.print("Enter the event's title: ");
+         title = key.next();
+         if(!Events.searchE(title, "Title")) //case it is found will be printed by the method itself exactly like phonebook search
+           System.out.println("Event not found!"); 
         }    
-        break; */
+        break; 
         
         case 6:
         
@@ -211,19 +212,40 @@ public class Phonebook
         displayByFirstName(Phonebook, name); //calls static display method 
         break;
         
-        /**case 7:
+        case 7:
         
         Events.display(); //events will be inserted alphabetically so this method just loops them
-        break; */
+        break; 
         
-       /** case 8:
+        case 8:
         
         System.out.print("Please enter event title: ");
         title = key.next();
         contactsByEvent(Events, title);
-        break; */
+        break; 
         
         case 9:
+        
+        System.out.print("Please enter event title: ");
+        title = key.next();
+        if(!Events.searchE(title, "Title"))
+          System.out.println("Event not found!");
+        else
+        {
+          System.out.println("Contact will be added to the contact above");
+          System.out.print("Enter contact name: ");
+          name = key.next();
+          if(!Phonebook.search(name, "Name")) //case it is found will be printed by the method itself! 
+               System.out.println("Contact not found"); 
+          else
+          {
+            Events.addContactToEvent(Phonebook.retrieve());
+            System.out.println("Contact added successfully!");
+          }
+        }
+        break;
+        
+        case 10:
         
         menuFlag = false;
         break;
@@ -235,13 +257,13 @@ public class Phonebook
       }
    }while(menuFlag);
    
-   Phonebook.findFirst();
-        
-        while(!Phonebook.last())
-        { System.out.println(Phonebook.retrieve());
-         Phonebook.findNext();
+        Events.findFirst(); //for testing
+        while(!Events.last())
+        { 
+          System.out.println(Events.retrieve());
+          Events.findNext();
         }
-        System.out.println(Phonebook.retrieve()); 
+        System.out.println(Events.retrieve()); 
 
 
  }
@@ -260,22 +282,27 @@ public class Phonebook
  }
  
  //contacts by shared event method
-/** public static void contactsByEvent(LinkedListEvent list, String eventName)
+ public static void contactsByEvent(LinkedListEvent list, String eventName)
  {
-    if(!list.search(eventName,"Event title"))
+    if(!list.searchE(eventName,"Title"))
       System.out.println("Event not found");
     else
     {
-      System.out.println("All contacts belonging to the event above: ")
-      list.getContactList().findfirst();
-      while(!list.getContactList().last())
+      System.out.println("All contacts belonging to the event above: ");
+      list.retrieve().getContactList().findFirst();
+      while(!list.retrieve().getContactList().last())
       {
-         System.out.println(list.getContactList().retrieve().toString());
-         list.getContactList().fintNext();
+         System.out.println(list.retrieve().getContactList().retrieve().toString());
+         list.retrieve().getContactList().findNext();
       }
-      System.out.println(list.getContactList().retrieve().toString());
-    } */
+      System.out.println(list.retrieve().getContactList().retrieve().toString());
+    } 
  }
+} 
+ 
+ 
+ 
+
  
  
  

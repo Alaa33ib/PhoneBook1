@@ -132,7 +132,7 @@ public class Event implements Comparable {
         }
 
   
-    public int compareTo(Event obj) {
+    public int compareTo(Object obj) {
         
             return (this.title.compareToIgnoreCase(obj.title));
 } 

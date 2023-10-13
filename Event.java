@@ -1,154 +1,67 @@
-public class Event implements Comparable {
-    private String title;
-    private String date;
-    private String time;
-    private String location;
-    private String contactName;
-    public LinkedListEvent events;
-    //public LinkedListContact  ContactsInEvent;
+public class Event implements Comparable 
+{
+    private String title, dateAndTime, location;
+    public LinkedListContact contactList = new LinkedListContact();
 
-    public Event() {
-        this.title = "";
-        this.date = null;
-        this.time = "";
-        this.location = "";
-        this.events = new LinkedListEvent ();
+    public Event() //default constructor
+    {
+       title = dateAndTime = location = "";
     }
 
-    public Event(String title, String date, String time, String location, String contactName, LinkedListEvent events) {
+    public Event(String title, Contact contact, String dateAndTime, String location) 
+    {
         this.title = title;
-        this.date = date;
-        this.time = time;
+        this.dateAndTime = dateAndTime;
         this.location = location;
-        this.contactName = contactName;
-        this.events = events;
+        contactList.insertContact(contact);
     }
 
-    public String getTitle() {
+    public String getTitle() 
+    {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getDateAndTime() 
+    {
+        return dateAndTime;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getLocation() {
+    public String getLocation() 
+    {
         return location;
     }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public LinkedListEvent getEvents() {
-        return events;
-    }
-
-    public void setEvents(LinkedListEvent events) {
-        this.events = events;
-    }
-
-    @Override
-    public String toString() {
-        return  "title=" + title + ", date=" + date + ", time=" + time + ", location=" + location + ", contactName=" + contactName + ", events=" + events ;
-    }
     
-
-     
-    public Event Search_Event_byTitle(String t){
-            
-            if(events.isEmpty())
-                return null;
-            events.findFirst();
-            while (!events. last())
-            {
-            if (events.retrieve().getTitle().equals (t)) 
-            return events.retrieve();
-            events.findNext();
-            }
-            if (events.retrieve().getTitle().equals (t)) 
-            return events.retrieve();
-           return null; 
-    }
-    
-  /*  public LinkedListEvent Search_Event_byContactName(String n){
-        
-    }*/
-            
-    public boolean addEvent( Event e)
+    public LinkedListContact getContactList()
     {
-        if (! events.isEmpty())
-        {
-            events.findFirst();
-            for ( int i = 0 ; i < events.size ; i++)
-            {
-                if ((events.retrieve().date.compareTo(e.date) == 0) && (events.retrieve().time.compareTo(e.time) == 0))
-                    return false;
-            }
-        }
-         events.insert(e);
-        return true;
+        return contactList;
     }
-    
-        public boolean CheckConflict(Event e){
-            
-        if(!events.isEmpty()) 
-        {
-           events.findFirst () ;
-           int i = 0;
-           while (i < events.size) {
-           if((events.retrieve().date.compareTo(e.date)== 0) &&(events.retrieve().time.compareTo (e.time)==0)) {
-           return false;
-           }
-           events.findNext ();
-           i++;
-           }
-        }
-          return true;
-        }
 
-  
-    public int compareTo(Object obj) {
-        
-            return (this.title.compareToIgnoreCase(obj.title));
+   
+    public String toString() 
+    {
+        return  "Title: " + title + ",  Date and Time: " + dateAndTime +  ",  Location: " + location + ",  Contact List: " + contactList.toString();
+    }
+
+    public int compareTo(Object s) 
+    {  
+      Event str = (Event)s;
+      int firstLength = this.getTitle().length();  
+      int secondLength = str.getTitle().length();  
+      int minLength = Math.min(firstLength, secondLength);
+      int i = 0;  
+      while(i < minLength) 
+      {  
+       char ch1 = this.getTitle().charAt(i);  
+       char ch2 = str.getTitle().charAt(i);  
+       if(ch1 != ch2) 
+       {  
+        if((int)(ch1-ch2) > 0)
+         return 1;
+         else
+        return -1;
+       }
+      i++;  
+     }  
+    return 0;  
+    }           
 } 
-
-    public void disply_events_alphabetically(){
-        if (events.isEmpty()){
-            System.out.println("No events found");
-        }
-        else{
-            events.findFirst();
-            for (int i=0;i< events.size;i++)
-            {
-              System.out.println((i+1) + ". Event : " + events.retrieve().title);
-              events.findNext();
-            }
-        }
-       
-    } 
-}

@@ -7,7 +7,7 @@ public class Phonebook
    
    
    LinkedListContact Phonebook = new LinkedListContact();
-   LinkedListEvent Events = new LinkedListEvent();
+   //LinkedListEvent Events = new LinkedListEvent();
    key.useDelimiter("\n");
    System.out.println("Welcome to the Linked Tree Phonebook!");
    boolean menuFlag = true;
@@ -22,7 +22,8 @@ public class Phonebook
       System.out.println("5.Print event details");
       System.out.println("6.Print contacts by first name");
       System.out.println("7.Print all events alphabetically");
-      System.out.println("8.Exit");
+      System.out.println("8.Print all contacts attending an event");
+      System.out.println("9.Exit");
       System.out.println();
       System.out.print("Enter your choice: ");
       int choice = key.nextInt();
@@ -92,7 +93,7 @@ public class Phonebook
             
             System.out.println("Enter the contact's email address: ");
             email = key.next();
-            if(!Phonebook.search(email, "Email")) //case it is found will be printed by the method itself!
+            if(!Phonebook.search(email, "Email Address")) //case it is found will be printed by the method itself!
                System.out.println("Contact not found"); 
             break; 
             
@@ -124,14 +125,15 @@ public class Phonebook
          System.out.println("Enter delete criteria: ");
          System.out.println("1.Name");
          System.out.println("2.Phone Number");
+         System.out.print("Enter your choice: ");
          criteria = key.nextInt();
          if (criteria == 1)
          { 
           System.out.print("Enter the contact's name: ");
           name = key.next();
-          if(Phonebook.delete(name, "Name")) //method will look for the contact that will be deleted and return true if the operation is successful
+          if(Phonebook.deleteContact(name, "Name")) //method will look for the contact that will be deleted and return true if the operation is successful
           { 
-           Events.deleteAll(name, "Name"); //method in event's data structure that deletes events based on contact's name or phone number
+           //Events.deleteAll(name, "Name"); //method in event's data structure that deletes events based on contact's name or phone number
            System.out.println("Contact successfully deleted");
           }
           else
@@ -141,9 +143,9 @@ public class Phonebook
          { 
           System.out.print("Enter the contact's phone number: ");
           phoneNum = key.next();
-          if(Phonebook.delete(phoneNum, "Phone Number"))
+          if(Phonebook.deleteContact(phoneNum, "Phone Number"))
           { 
-           Events.deleteAll(phoneNum, "Phone Number");
+           //Events.deleteAll(phoneNum, "Phone Number");
            System.out.println("Contact successfully deleted");
           }
           else
@@ -153,7 +155,7 @@ public class Phonebook
            System.out.println("You entered a number outside the allowed range, try again!");
          break;
          
-         case 4:
+        /** case 4:
      
          System.out.print("Enter the event's title: ");
          String title = key.next();
@@ -167,7 +169,7 @@ public class Phonebook
          {
           System.out.println("Event will be scheduled with the contact above");
           Events.insertEvent(new Event(title, Phonebook.retrieve(), dateAndTime, location)); 
-          Phonebook.retrieve().getEventList().insertEvent(new Event(title, dateAndTime, location)); //event has a constructor that doesn't require a contact
+          Phonebook.retrieve().getEventList().insertEvent(new Event(title, dateAndTime, location)); //event has a constructor that doesn't require a contact because it's redundant to have a contact that has an event with itself
           System.out.println("Event scheduled successfully!");
          }
          else
@@ -189,9 +191,9 @@ public class Phonebook
            System.out.println("Contact with this name is not found");
          else
          {
-          System.out.println("If event is found, it belongs to the contact above."); 
-          if(!Events.search(name, "Name")) //case it is found will be printed by the method itself 
-           System.out.println("Event not found"); 
+          System.out.println("The contact exists and these are the events scheduled with it: "); 
+          Phonebook.retrieve().getEventList().display(); //display method is in LinkedListEvent class 
+         }
         }    
         else if (criteria == 2)
         {
@@ -200,21 +202,28 @@ public class Phonebook
          if(!Events.search(title, "Title")) //case it is found will be printed by the method itself exactly like phonebook search
            System.out.println("Event not found"); 
         }    
-        break; 
+        break; */
         
         case 6:
         
-        System.out.println("Enter the first name: ");
+        System.out.print("Enter the first name: ");
         name = key.next();
         displayByFirstName(Phonebook, name); //calls static display method 
         break;
         
-        case 7:
+        /**case 7:
         
         Events.display(); //events will be inserted alphabetically so this method just loops them
-        break; 
+        break; */
         
-        case 8:
+       /** case 8:
+        
+        System.out.print("Please enter event title: ");
+        title = key.next();
+        contactsByEvent(Events, title);
+        break; */
+        
+        case 9:
         
         menuFlag = false;
         break;
@@ -232,7 +241,7 @@ public class Phonebook
         { System.out.println(Phonebook.retrieve());
          Phonebook.findNext();
         }
-        System.out.println(Phonebook.retrieve());
+        System.out.println(Phonebook.retrieve()); 
 
 
  }
@@ -251,13 +260,13 @@ public class Phonebook
  }
  
  //contacts by shared event method
- public static void contactsByEvent(LinkedListEvent list, String eventName)
+/** public static void contactsByEvent(LinkedListEvent list, String eventName)
  {
     if(!list.search(eventName,"Event title"))
       System.out.println("Event not found");
     else
     {
-      System.out.println("All contacts belonging to the event above: ");
+      System.out.println("All contacts belonging to the event above: ")
       list.getContactList().findfirst();
       while(!list.getContactList().last())
       {
@@ -265,8 +274,10 @@ public class Phonebook
          list.getContactList().fintNext();
       }
       System.out.println(list.getContactList().retrieve().toString());
-    } 
+    } */
  }
+ 
+ 
  
  
  

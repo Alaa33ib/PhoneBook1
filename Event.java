@@ -1,7 +1,7 @@
 public class Event implements Comparable 
 {
     private String title, dateAndTime, location;
-    public LinkedListContact contactList = new LinkedListContact();
+    public LinkedListContact contactList = new LinkedListContact(); //contacts associated with each event
 
     public Event() //default constructor
     {
@@ -35,11 +35,10 @@ public class Event implements Comparable
     {
         return contactList;
     }
-
-   
+ 
     public String toString() 
     {
-        return  "Title: " + title + "-Date and Time: " + dateAndTime +  "-Location: " + location + "-Contact List:\n" + contactList.toString();
+        return  "Title: " + title + " - Date and Time: " + dateAndTime +  " - Location: " + location;
     }
 
     public int compareTo(Object s) 
@@ -63,7 +62,5 @@ public class Event implements Comparable
       i++;  
      }  
     return 0;  
-    }           
+   }           
 } 
-
- 

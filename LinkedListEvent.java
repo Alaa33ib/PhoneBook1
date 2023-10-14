@@ -69,7 +69,9 @@ public class LinkedListEvent //LinkedList of Events
     	else 
         current = head;
    }
+   
   //end of ADT methods  
+  
   public boolean isNotATimeConflict(String dateAndTime)
   {
     Node2 temp = head; 
@@ -82,7 +84,7 @@ public class LinkedListEvent //LinkedList of Events
     return true;
   } 
 
-  public void deleteAll(String attribute, String criteria)
+  public void deleteAll(String attribute, String criteria) //deletes all instances of a contact associated with an event; used when deleting a contact
   {
      Node2 tmp = head;
      switch(criteria)
@@ -107,7 +109,7 @@ public class LinkedListEvent //LinkedList of Events
            tmp = current;
         }
         else
-         tmp = tmp.getNext();
+          tmp = tmp.getNext();
       }
       break;
               
@@ -136,7 +138,6 @@ public class LinkedListEvent //LinkedList of Events
       break;
     }
   }  
-    
        
     public boolean searchE(String attribute, String criteria)
     {
@@ -156,12 +157,13 @@ public class LinkedListEvent //LinkedList of Events
            System.out.println(this.retrieve().toString());
            return true;
          }
-     	  current = current.getNext();
+     	   current = current.getNext();
      	 }
      	 current = temp;
      	 return false;
        
       case "Contact Name":
+      
       Node2 tmp = head;
       while(tmp != null)
       {
@@ -170,8 +172,8 @@ public class LinkedListEvent //LinkedList of Events
         {
      	    if(tmp.getData().getContactList().retrieve().getName().equalsIgnoreCase(attribute)) 
           { 
-           System.out.println(tmp.getData().toString());
-           flag = true;
+            System.out.println(tmp.getData().toString());
+            flag = true;
           }
      	    tmp.getData().getContactList().findNext();
      	  }
@@ -184,12 +186,12 @@ public class LinkedListEvent //LinkedList of Events
       }
       return flag;  
         
-     default: 
+      default: 
      
-     System.out.println("Please make sure criteria input is correct"); 
-     return false;
-    }
-  }
+      System.out.println("Please make sure criteria input is correct"); 
+      return false;
+     }
+   }
   
   public void insertEvent(Event data)
   {
@@ -205,8 +207,8 @@ public class LinkedListEvent //LinkedList of Events
     	ev.setNext(head);
       head = ev;
     }
-     else
-     {
+    else
+    {
       Node2 p = head, q = head.getNext();
       while(p.getNext() != null)
      	{ if((data.compareTo(p.getData()) >= 0) && (data.compareTo(q.getData()) < 0))
@@ -216,10 +218,10 @@ public class LinkedListEvent //LinkedList of Events
       }
       current = p;
       insert(data);
-    } 
+   } 
   } 
 
-   public void display()
+   public void display() //problem
    {
      if(this.isEmpty())
        System.out.println("No events found");
@@ -234,9 +236,19 @@ public class LinkedListEvent //LinkedList of Events
      }
    }
    
-   public void addContactToEvent(Contact contact) //needs to check if it exists in the list not done yet
+   public boolean addContactToEvent(Contact contact) 
    {
-     this.retrieve().getContactList().insertContact(contact);
+     if(this.retrieve().getContactList().search(contact.getName(), "Name") || this.retrieve().getContactList().search(contact.getPhone(), "Phone Number"))
+     {
+       System.out.println();
+       System.out.println("Event is already scheduled with this contact, look above, addition is rejected!");
+       return false;
+     } 
+     else
+     {
+       this.retrieve().getContactList().insertContact(contact);
+       return true;
+     }
    }  
 }
 

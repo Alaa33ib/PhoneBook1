@@ -35,7 +35,7 @@ public class Phonebook
       {
         case 1:
         
-        System.out.print("Enter the contact's name: ");
+        System.out.print("Enter the contact's name(FirstName LastName): ");
         String name = key.next();
         if(Phonebook.search(name, "Name"))
         {
@@ -57,9 +57,10 @@ public class Phonebook
         String birthday = key.next();
         System.out.print("Enter any notes for the contact: ");
         String notes = key.next();
+        System.out.println();        
         Phonebook.insertContact(new Contact(name, phoneNum, email, address, birthday, notes));
         System.out.println("Contact added successfully!");
-        
+        System.out.println();        
         break; 
         
         case 2:
@@ -79,45 +80,66 @@ public class Phonebook
             
             System.out.print("Enter the contact's name: ");
             name = key.next();
+            System.out.println();
             if(!Phonebook.search(name, "Name")) //case it is found will be printed by the method itself! 
-               System.out.println("Contact not found"); 
+              System.out.println("Contact not found!");
+            else        
+              System.out.println("Look above, contact found!");    
+            System.out.println();
             break;     
                
             case 2:
             
             System.out.print("Enter the contact's phone number: ");
             phoneNum = key.next();
+            System.out.println();
             if(!Phonebook.search(phoneNum, "Phone Number")) //case it is found will be printed by the method itself!
-               System.out.println("Contact not found"); 
+               System.out.println("Contact not found!"); 
+            else        
+              System.out.println("Look above, contact found!");    
+            System.out.println();
             break; 
             
             case 3:
             
             System.out.print("Enter the contact's email address: ");
             email = key.next();
+            System.out.println();
             if(!Phonebook.search(email, "Email Address")) //case it is found will be printed by the method itself!
-               System.out.println("Contact not found"); 
+               System.out.println("Contact not found!"); 
+            else        
+              System.out.println("Look above, contact(s) found!");  
+            System.out.println();
             break; 
             
             case 4:
             
             System.out.print("Enter the contact's address: ");
             address = key.next();
+            System.out.println();
             if(!Phonebook.search(address, "Address")) //case it is found will be printed by the method itself! 
-               System.out.println("Contact not found"); 
+               System.out.println("Contact not found!"); 
+            else        
+              System.out.println("Look above, contact(s) found!");  
+            System.out.println();
             break; 
 
             case 5:
             
             System.out.print("Enter the contact's birthday: ");
             birthday = key.next();
+            System.out.println();
             if(!Phonebook.search(birthday, "Birthday")) //case it is found will be printed by the method itself!
-               System.out.println("Contact not found"); 
+               System.out.println("Contact not found!"); 
+            else        
+              System.out.println("Look above, contact(s) found!");  
+            System.out.println();
             break; 
              
             default:
-        
-            System.out.println("You entered a number outside the allowed range, try again!");
+            
+            System.out.println();
+            System.out.println("You entered a number outside the allowed range, try again!\n");
             break;
           }
          break;
@@ -133,33 +155,40 @@ public class Phonebook
          { 
           System.out.print("Enter the contact's name: ");
           name = key.next();
+          System.out.println();
           if(Phonebook.deleteContact(name, "Name")) //method will look for the contact that will be deleted and return true if the operation is successful
           { 
            Events.deleteAll(name, "Name"); //method in event's data structure that deletes events based on contact's name or phone number
-           System.out.println("Contact successfully deleted");
+           System.out.println("Contact successfully deleted!");
           }
           else
-           System.out.println("Contact couldn't be found, deletion is not successful");
+           System.out.println("Contact couldn't be found, deletion is not successful!");
+           System.out.println();
          }
          else if (criteria == 2)
          { 
           System.out.print("Enter the contact's phone number: ");
           phoneNum = key.next();
+          System.out.println();
           if(Phonebook.deleteContact(phoneNum, "Phone Number"))
           { 
            Events.deleteAll(phoneNum, "Phone Number");
-           System.out.println("Contact successfully deleted");
+           System.out.println("Contact successfully deleted!");
           }
           else
-            System.out.println("Contact couldn't be found, deletion is not successful");
+            System.out.println("Contact couldn't be found, deletion is not successful!");
+          System.out.println();
          }
          else
-           System.out.println("You entered a number outside the allowed range, try again!");
+         {
+           System.out.println();
+           System.out.println("You entered a number outside the allowed range, try again!\n");
+         }
          break;
          
-         case 4:
+         case 4: 
      
-         System.out.print("Enter the event's title: ");
+         System.out.print("Enter the event's title: "); //make a uniqueness constraint here
          String title = key.next();
          System.out.print("Enter the contact name: ");
          String contactName = key.next();           
@@ -167,17 +196,24 @@ public class Phonebook
          String dateAndTime = key.next();
          System.out.print("Enter the event's location: ");
          String location = key.next();
-         if(Phonebook.search(contactName, "Name") && Events.isNotATimeConflict(dateAndTime)) //search sets found element as current
+         System.out.println();
+         if(Events.isNotATimeConflict(dateAndTime)) //search sets found element as current
          {
-          System.out.println("Event will be scheduled with the contact above");
-          Events.insertEvent(new Event(title, Phonebook.retrieve(), dateAndTime, location)); 
-          System.out.println("Event scheduled successfully!");
+          if(Phonebook.search(contactName, "Name")) 
+          { 
+            System.out.println("Event will be scheduled with the contact above.");
+            Events.insertEvent(new Event(title, Phonebook.retrieve(), dateAndTime, location));
+            System.out.println("Event scheduled successfully!");
+          }
+          else
+            System.out.println("Contact not found!");
          }
          else
-          System.out.println("Event couldn't be scheduled because of a contact and/or time conflict!"); 
+          System.out.println("Event couldn't be scheduled because of a time conflict!"); 
+        System.out.println();
         break; 
         
-        case 5:
+        case 5: //fix spacing here
         
         System.out.println("Enter search criteria:");
         System.out.println("1.Contact name");
@@ -212,9 +248,10 @@ public class Phonebook
         displayByFirstName(Phonebook, name); //calls static display method 
         break;
         
-        case 7:
+        case 7: //doesnt work properly the method
         
-        Events.display(); //events will be inserted alphabetically so this method just loops them
+        Events.display();
+        System.out.println();
         break; 
         
         case 8:
@@ -232,13 +269,14 @@ public class Phonebook
           System.out.println("Event not found!");
         else
         {
-          System.out.println("Contact will be added to the contact above");
+          System.out.println("Contact will be added to the event above!");
           System.out.print("Enter contact name: ");
           name = key.next();
           if(!Phonebook.search(name, "Name")) //case it is found will be printed by the method itself! 
                System.out.println("Contact not found"); 
           else
           {
+            System.out.println("Contact above will be added to this event!");
             Events.addContactToEvent(Phonebook.retrieve());
             System.out.println("Contact added successfully!");
           }
@@ -257,16 +295,15 @@ public class Phonebook
       }
    }while(menuFlag);
    
-        Events.findFirst(); //for testing
-        while(!Events.last())
-        { 
-          System.out.println(Events.retrieve());
-          Events.findNext();
-        }
-        System.out.println(Events.retrieve()); 
-
+   Events.findFirst(); //testing
+   while(!Events.last())
+    { System.out.println(Events.retrieve().toString());
+      Events.findNext(); }
+   System.out.println(Events.retrieve().toString());
+    
 
  }
+ 
  //contacts by first name method
  public static void displayByFirstName(LinkedListContact list, String firstName)
  {
@@ -299,13 +336,6 @@ public class Phonebook
     } 
  }
 } 
- 
- 
- 
-
- 
- 
- 
  
  
  

@@ -71,7 +71,9 @@ public class LinkedListContact //LinkedList of Contacts
     	else 
         current = head;
     }
-
+    
+    //end of ADT methods
+    
     public boolean deleteContact(String attribute, String criteria) //deletes a contact from the list
     {
       Node1 tmp = head;
@@ -240,10 +242,10 @@ public class LinkedListContact //LinkedList of Contacts
       }
       current = p;
       insert(data);
-   }
+    }
   } 
   
-  public void display()
+  public void display() //displays all contacts in the list might remove it
   {
      Node1 tmp = head;
      while(tmp != null)
@@ -258,9 +260,14 @@ public class LinkedListContact //LinkedList of Contacts
      Node1 tmp = head;
      String list = "";
      while(tmp != null)
-     {  list += tmp.getData().toString() + "\n ";
+     {  list += tmp.getData().toString() + "\n";
         tmp = tmp.getNext();
      }
+     return list; 
+  }
+
+}
+
      return list; 
   }
 

@@ -239,17 +239,15 @@ public class LinkedListEvent //LinkedList of Events
    public boolean addContactToEvent(Contact contact) 
    {
      if(this.retrieve().getContactList().search(contact.getName(), "Name") || this.retrieve().getContactList().search(contact.getPhone(), "Phone Number"))
-     {
-       System.out.println();
-       System.out.println("Event is already scheduled with this contact, look above, addition is rejected!");
-       return false;
-     } 
+       return false; 
      else
      {
        this.retrieve().getContactList().insertContact(contact);
        return true;
      }
    }  
+}
+
 }
 
 

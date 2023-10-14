@@ -221,7 +221,7 @@ public class LinkedListEvent //LinkedList of Events
    } 
   } 
 
-   public void display() //problem
+   public void display() 
    {
      if(this.isEmpty())
        System.out.println("No events found");
@@ -230,7 +230,7 @@ public class LinkedListEvent //LinkedList of Events
        Node2 tmp = head;
        while(tmp != null)
        {
-         System.out.println(this.retrieve().toString());
+         System.out.println(tmp.getData().toString());
          tmp = tmp.getNext();
        }
      }

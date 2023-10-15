@@ -224,7 +224,7 @@ public class LinkedListEvent //LinkedList of Events
    public void display() 
    {
      if(this.isEmpty())
-       System.out.println("No events found");
+       System.out.println("No events found!");
      else
      {
        Node2 tmp = head;

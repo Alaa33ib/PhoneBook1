@@ -25,7 +25,8 @@ public class Phonebook
       System.out.println("7.Print all events alphabetically");
       System.out.println("8.Print all contacts attending an event");
       System.out.println("9.Add a contact to a scheduled event");
-      System.out.println("10.Exit");
+      System.out.println("10.Delete a scheduled event");
+      System.out.println("11.Exit");
       System.out.println();
       System.out.print("Enter your choice: ");
       int criteria = key.nextInt();
@@ -39,14 +40,14 @@ public class Phonebook
         String name = key.next();
         if(Phonebook.search(name, "Name"))
         {
-          System.out.println("Contact already exists in phonebook, look above, addition is rejected.");
+          System.out.println("Contact already exists in phonebook, look above, addition is rejected.\n");
           continue;
         } 
         System.out.print("Enter the contact's phone number: ");
         String phoneNum = key.next();
         if(Phonebook.search(phoneNum, "Phone Number"))
         {
-           System.out.println("Contact already exists in phonebook, look above, addition is rejected.");
+           System.out.println("Contact already exists in phonebook, look above, addition is rejected.\n");
            continue;
         }
         System.out.print("Enter the contact's email address: ");
@@ -195,12 +196,11 @@ public class Phonebook
          String title = key.next();
          if(Events.searchE(title, "Title"))
          {
-           System.out.println();
-           System.out.println("Event already exists, look above, addition is rejected.");
+           System.out.println("Event already exists, look above, addition is rejected.\n");
            continue;
          }
          System.out.print("Enter the contact name: ");
-         String contactName = key.next();           
+         String contactName = key.next();          
          System.out.print("Enter the event's date and time(MM/DD/YYYY HH:MM): ");
          String dateAndTime = key.next();
          System.out.print("Enter the event's location: ");
@@ -215,7 +215,7 @@ public class Phonebook
             System.out.println("Event scheduled successfully!");
           }
           else
-            System.out.println("Contact not found!");
+            System.out.println("Contact not found, cannot schedule event!");
          }
          else
           System.out.println("Event couldn't be scheduled because of a time conflict!"); 
@@ -236,10 +236,10 @@ public class Phonebook
          contactName = key.next();
          System.out.println();
          if(!Phonebook.search(contactName, "Name"))
-           System.out.println("Contact with this name is not found");
+           System.out.println("Contact with this name is not found!");
          else
          {
-          System.out.println("The contact exists, look above, and these are the events scheduled with it: "); 
+          System.out.println("The contact exists, look above, and these are the event(s) scheduled with it: "); 
           Events.searchE(contactName, "Contact Name");
          }
         }    
@@ -300,7 +300,7 @@ public class Phonebook
           {   
             System.out.println("Contact exists, look above!");
             if(Events.addContactToEvent(Phonebook.retrieve()))
-              System.out.println("Contact added successfully!");
+              System.out.println("Contact added to the event successfully!");
             else
               System.out.println("Contact already exists in this event's contact list, look above, addition is rejected!");          
           }
@@ -313,12 +313,26 @@ public class Phonebook
         
         case 10:
         
+        System.out.print("Please enter event title: ");
+        title = key.next();
+        System.out.println();
+        if(Events.deleteEvent(title)) //method will look for the event that will be deleted and return true if the operation is successful
+          System.out.println("Event successfully deleted!");
+        else
+          System.out.println("Event couldn't be found, deletion is not successful!");
+          System.out.println();
+        break;
+
+        
+        case 11:
+        
         menuFlag = false;
         break;
         
         default:
         
-        System.out.println("You entered a number outside the allowed range, try again!");
+        System.out.println();
+        System.out.println("You entered a number outside the allowed range, try again!\n");
         break;
       }
    }while(menuFlag);
@@ -348,7 +362,7 @@ public class Phonebook
  public static void contactsByEvent(LinkedListEvent list, String eventName)
  {
     if(!list.searchE(eventName,"Title"))
-      System.out.println("Event not found");
+      System.out.println("Event not found!");
     else
     {
       System.out.println("All contacts belonging to the event above: ");
@@ -360,6 +374,14 @@ public class Phonebook
       }
       System.out.println(list.retrieve().getContactList().retrieve().toString());
    } 
+ }
+ 
+} 
+ 
+ 
+ 
+ 
+
  }
  
 } 

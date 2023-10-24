@@ -51,7 +51,7 @@ public class LinkedListEvent //LinkedList of Events
 		 current = current.getNext();
 		 current.setNext(temp);
 	  }
-	}
+   }
     
    public void remove()
    {
@@ -84,7 +84,7 @@ public class LinkedListEvent //LinkedList of Events
     return true;
   } 
 
-  public void deleteAll(String attribute, String criteria) //deletes all instances of a contact associated with an event; used when deleting a contact
+  public void deleteAll(String attribute, String criteria) //deletes all instances of a contact associated with an event; used exclusively when deleting a contact
   {
      Node2 tmp = head;
      switch(criteria)
@@ -102,7 +102,7 @@ public class LinkedListEvent //LinkedList of Events
         }
         if(tmp.getData().getContactList().retrieve().getName().equalsIgnoreCase(attribute)) //checks last element
            tmp.getData().getContactList().remove();
-        if(tmp.getData().getContactList().isEmpty())
+        if(tmp.getData().getContactList().isEmpty()) //Event's contact list is empty
         {
            current = tmp;
            this.remove();
@@ -188,12 +188,12 @@ public class LinkedListEvent //LinkedList of Events
         
       default: 
      
-      System.out.println("Please make sure criteria input is correct"); 
+      System.out.println("Please make sure criteria input is correct."); 
       return false;
      }
    }
   
-  public void insertEvent(Event data)
+  public void insertEvent(Event data) //inserts event to event list
   {
     Node2 ev = new Node2(data);
     if(isEmpty()) 
@@ -218,10 +218,10 @@ public class LinkedListEvent //LinkedList of Events
       }
       current = p;
       insert(data);
-   } 
+    } 
   } 
 
-   public void display() 
+   public void displayEvents() //displays all events in the list; they are already ordered alphabetically
    {
      if(this.isEmpty())
        System.out.println("No events found!");
@@ -245,9 +245,33 @@ public class LinkedListEvent //LinkedList of Events
        this.retrieve().getContactList().insertContact(contact);
        return true;
      }
-   }  
+   } 
+   
+   public boolean deleteEvent(String title) //deletes a event from the list
+   {
+      Node2 tmp = head;
+      Node2 prev = null;
+             
+      while(tmp != null)
+      {
+         if(tmp.getData().getTitle().equalsIgnoreCase(title))
+         {
+           if(tmp == head) 
+           {
+             head = head.getNext();
+             current = head;
+           }
+    	     else 
+           {
+    		    prev.setNext(tmp.getNext());	
+             current = head;
+           }
+           return true;
+         }
+         prev = tmp;
+         tmp = tmp.getNext();
+      }
+      return false;
+   }
+ 
 }
-
-}
-
-

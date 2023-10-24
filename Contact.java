@@ -12,15 +12,15 @@ public class Contact implements Comparable
   {
     this.name = name;
     this.phone = phone;
-    this.email = email;
-    this.address = address;
-    this.birthday = birthday;
-    this.notes = notes;
+	 this.email = email;
+	 this.address = address;
+	 this.birthday = birthday;
+	 this.notes = notes;
   }
 
   public String toString()
   {
-	 return "Name: "+name+"-Phone: "+phone+"-Email: "+email+"-Address: "+address+"-Birthday: "+birthday+"-Notes: "+notes;
+	 return "Name: " + name + " - Phone: " + phone + " - Email: " + email + " - Address: " + address + " - Birthday: " + birthday + " - Notes: " + notes;
   }
 
   public int compareTo(Object s) //compares contact names alphabetically
@@ -42,8 +42,8 @@ public class Contact implements Comparable
        return -1;
      }
      i++;  
-    }  
-  return 0;  
+   }  
+   return 0;  
   } 
   
   public String getName()
@@ -75,6 +75,9 @@ public class Contact implements Comparable
   {
 	return notes;
   }
+  
+}
+
   
 }
 

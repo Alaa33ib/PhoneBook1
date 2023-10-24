@@ -38,7 +38,7 @@ public class Phonebook
         
         System.out.print("Enter the contact's name(FirstName LastName): ");
         String name = key.next();
-        if(Phonebook.search(name, "Name"))
+        if(Phonebook.search(name, "Name")) 
         {
           System.out.println("Contact already exists in phonebook, look above, addition is rejected.\n");
           continue;
@@ -161,7 +161,7 @@ public class Phonebook
           System.out.println();
           if(Phonebook.deleteContact(name, "Name")) //method will look for the contact that will be deleted and return true if the operation is successful
           { 
-            Events.deleteAll(name, "Name"); //method in event's data structure that deletes events based on contact's name or phone number
+            Events.deleteAll(name, "Name"); //method in LinkedListEvent that deletes contacts from events based on contact's name or phone number
             System.out.println("Contact successfully deleted!");
           }
           else
@@ -248,7 +248,7 @@ public class Phonebook
          System.out.print("Enter the event's title: ");
          title = key.next();
          System.out.println();
-         if(!Events.searchE(title, "Title")) //case it is found will be printed by the method itself exactly like phonebook search
+         if(!Events.searchE(title, "Title")) //case it is found will be printed by the method itself 
            System.out.println("Event not found!"); 
         } 
         System.out.println();   
@@ -260,7 +260,7 @@ public class Phonebook
         System.out.print("Enter the first name: ");
         name = key.next();
         System.out.println();
-        displayByFirstName(Phonebook, name); //calls static display method 
+        displayByFirstName(Phonebook, name); 
         System.out.println();
         break;
         
@@ -268,7 +268,7 @@ public class Phonebook
         case 7: 
         
         System.out.println();
-        Events.display();
+        Events.displayEvents();
         System.out.println();
         break; 
         
@@ -337,14 +337,11 @@ public class Phonebook
       }
    }while(menuFlag);
    
-   //for testing
-   Events.display();
-   Phonebook.display();
-    
+   System.out.println("Thank you for using the phonebook!");
 
- }
+}
  
- //contacts by first name method; assumes names are at least first followed by last
+ //contacts by first name method; assumes names are first followed by last
  public static void displayByFirstName(LinkedListContact list, String firstName)
  {
   list.findFirst();
@@ -354,7 +351,7 @@ public class Phonebook
       System.out.println(list.retrieve().toString());
     list.findNext();
   }
-  if(firstName.equalsIgnoreCase(list.retrieve().getName().substring(0,list.retrieve().getName().indexOf(' '))))
+  if(firstName.equalsIgnoreCase(list.retrieve().getName().substring(0,list.retrieve().getName().indexOf(' ')))) //checks last element
     System.out.println(list.retrieve().toString());
  }
  
@@ -372,20 +369,11 @@ public class Phonebook
          System.out.println(list.retrieve().getContactList().retrieve().toString());
          list.retrieve().getContactList().findNext();
       }
-      System.out.println(list.retrieve().getContactList().retrieve().toString());
-   } 
+      System.out.println(list.retrieve().getContactList().retrieve().toString()); //prints last element
+    } 
  }
  
 } 
- 
- 
- 
- 
-
- }
- 
-} 
- 
  
  
  

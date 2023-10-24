@@ -70,9 +70,9 @@ public class LinkedListContact //LinkedList of Contacts
         current = current.getNext();
     	else 
         current = head;
-    }
+   }
     
-    //end of ADT methods
+   //end of ADT methods
     
     public boolean deleteContact(String attribute, String criteria) //deletes a contact from the list
     {
@@ -127,9 +127,10 @@ public class LinkedListContact //LinkedList of Contacts
       return false; 
      }
      return false;
-    }
+   }
+   
     
-    public boolean search(String attribute, String criteria)
+    public boolean search(String attribute, String criteria) //searches for a contact in the list based on a specific criteria
     {
       boolean flag = false; 
       Node1 temp = current;
@@ -211,13 +212,13 @@ public class LinkedListContact //LinkedList of Contacts
         
      default: 
      
-     System.out.println("Please make sure criteria input is correct"); 
+     System.out.println("Please make sure criteria input is correct."); 
      return false;
      
     }
   }
   
-  public void insertContact(Contact data)
+  public void insertContact(Contact data) //inserts a contact into the list alphabetically 
   {
     Node1 con = new Node1(data);
     if(isEmpty()) 
@@ -245,7 +246,7 @@ public class LinkedListContact //LinkedList of Contacts
     }
   } 
   
-  public void display() //displays all contacts in the list might remove it
+  public void display() //displays all contacts in the list; for testing purposes only
   {
      Node1 tmp = head;
      while(tmp != null)
@@ -255,26 +256,7 @@ public class LinkedListContact //LinkedList of Contacts
      }
   }
   
-  public String toString()
-  {
-     Node1 tmp = head;
-     String list = "";
-     while(tmp != null)
-     {  list += tmp.getData().toString() + "\n";
-        tmp = tmp.getNext();
-     }
-     return list; 
-  }
-
 }
-
-     return list; 
-  }
-
-}
-
-
-
 
 
 
